@@ -1,11 +1,13 @@
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
-class menu {
+class Menu {
     Map<String, Double> items;
+    Logger logger = Logger.getLogger(getClass().getName());
 
-    menu() {
+    Menu() {
         items = new HashMap<>();
         items.put("Burger", 10.0);
         items.put("Pizza", 15.0);
@@ -14,15 +16,15 @@ class menu {
     }
 
     void show() {
-        System.out.println("menu:");
+        logger.info("menu:");
         for (Map.Entry<String, Double> item : items.entrySet()) {
-            System.out.println(item.getKey() + ": $" + item.getValue());
+            logger.info(item.getKey() + ": $" + item.getValue());
         }
     }
 
     boolean aval(String var45) {
         //is here
-        System.out.println("here i am in aval method");
+        logger.info("here i am in aval method");
         return var45.equals("Burger") || var45.equals("Pizza") || var45.equals("Salad") || var45.equals("Pasta");
     }
 
@@ -57,16 +59,16 @@ class Order {
     }
 }
 
-class sumThe_Total {
+class SumTheTotal {
     double baseCost = 5;
 
-    double calc(Order order, menu menu) {
+    double calc(Order order, Menu menu) {
         //my function to calculate the total cost
-        double totalC_ = baseCost;
+        double totalC = baseCost;
         int var2 = 0;
 
         for (Map.Entry<String, Integer> item : order.getvar45s().entrySet()) {
-            totalC_ += menu.getPrice(item.getKey()) * item.getValue();
+            totalC += menu.getPrice(item.getKey()) * item.getValue();
             var2 += item.getValue();
         }
 
@@ -77,19 +79,19 @@ class sumThe_Total {
             discount = 0.2;
         }
 
-        totalC_ = totalC_ - (totalC_ * discount);
+        totalC = totalC - (totalC * discount);
 
         //TODO: Add more discounts based on total cost in requirements
 
-        return totalC_;
+        return totalC;
     }
 }
 
 public class myprogram {
     public static void main(String[] args) {
-        menu menu = new menu();
+        Menu menu = new Menu();
         Order order = new Order();
-        sumThe_Total calculator = new sumThe_Total();
+        SumTheTotal calculator = new SumTheTotal();
         Scanner scanner = new Scanner(System.in);
 
         while (true) {
